@@ -1,16 +1,13 @@
 package com.nest.strykerwebappbackend.controller;
 
 import com.nest.strykerwebappbackend.entity.ToolSet;
-import com.nest.strykerwebappbackend.exception.ResourceNotFoundException;
 import com.nest.strykerwebappbackend.repository.ToolSetRepository;
 import com.nest.strykerwebappbackend.service.MyTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.GeneralSecurityException;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +42,7 @@ public class ToolSetController {
     }
 
 //    update toolset
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT, produces= "application/json",  consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "toolset/update/{id}", method = RequestMethod.PUT, produces= "application/json",  consumes = MediaType.APPLICATION_JSON_VALUE)
     public String updateToolset(@PathVariable Long id, @RequestBody ToolSet toolSetDetails){
         ToolSet existingToolSet = myTaskService.getById(id);
         ToolSet updateToolset = myTaskService.updateTool(existingToolSet,toolSetDetails);
@@ -67,12 +64,6 @@ public class ToolSetController {
         return myTaskService.category();
     }
 
-
-    @GetMapping("/check/{name}")
-    public ResponseEntity<?> checkIfUserExists(@PathVariable("name") String name) {
-        boolean toolsetExists = toolSetRepository.existsByName(name);
-        return ResponseEntity.ok(toolsetExists);
-    }
 
 
 }
